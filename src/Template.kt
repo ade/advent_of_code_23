@@ -19,5 +19,5 @@ fun main() {
     //part2(test) shouldBe 200
 
     println("Part 1: ${part1(input)}")
-    println("Part 2: ${part2(input)}")
+    //println("Part 2: ${part2(input)}")
 }
