@@ -9,20 +9,13 @@ fun main() {
         }
     }
     fun getLayers(data: List<Long>): List<List<Long>> {
-        val layers = mutableListOf<List<Long>>()
-        layers.add(data)
-        var layerIndex = 1
-        do {
-            val prev = layers[layerIndex-1]
-            val layer = prev.foldIndexed(listOf<Long>()) { index, acc, it ->
-                val n = prev.getOrNull(index-1) ?: return@foldIndexed acc
-                acc + (it - n)
-            }
-            layers.add(layer)
-            layerIndex++
-        } while (layer.any { it != 0L })
-
-        return layers
+        val result = mutableListOf(data)
+        var prev = data
+        while(result.last().any { it != 0L }) {
+            prev = prev.windowed(2).map { (a, b) -> b - a }
+            result.add(prev)
+        }
+        return result
     }
 
     fun extrapolated(data: List<List<Long>>): List<List<Long>> {
